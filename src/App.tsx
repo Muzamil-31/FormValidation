@@ -1,4 +1,4 @@
-import { Link, Route, Routes } from "react-router-dom";
+import { NavLink, Route, Routes } from "react-router-dom";
 import Form from "./components/Form";
 import FormRecords from "./components/FormRecords";
 import { FormProvider } from "./context/FormContext";
@@ -6,22 +6,35 @@ import { FormProvider } from "./context/FormContext";
 function App() {
   return (
     <FormProvider>
-      <main className="min-h-screen bg-gradient-to-br from-violet-100 via-sky-50 to-white px-4 py-8 text-slate-800 sm:px-6 lg:px-8">
+      <main className="min-h-screen bg-gray-50 px-4 py-8 text-gray-900 sm:px-6">
         <div className="mx-auto flex w-full max-w-5xl flex-col gap-6">
-          <nav className="flex justify-end gap-3">
-            <Link
+          <nav className="flex gap-2 border-b border-gray-200 pb-3">
+            <NavLink
               to="/"
-              className="rounded-full border border-violet-200 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-700 shadow-sm transition hover:border-violet-400 hover:bg-violet-50"
+              end
+              className={({ isActive }) =>
+                `rounded-md px-4 py-2 text-sm font-medium transition ${
+                  isActive
+                    ? "bg-blue-600 text-white"
+                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                }`
+              }
             >
               Form
-            </Link>
+            </NavLink>
 
-            <Link
+            <NavLink
               to="/records"
-              className="rounded-full border border-violet-200 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-700 shadow-sm transition hover:border-violet-400 hover:bg-violet-50"
+              className={({ isActive }) =>
+                `rounded-md px-4 py-2 text-sm font-medium transition ${
+                  isActive
+                    ? "bg-blue-600 text-white"
+                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                }`
+              }
             >
               Records
-            </Link>
+            </NavLink>
           </nav>
 
           <Routes>

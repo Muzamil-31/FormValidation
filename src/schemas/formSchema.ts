@@ -5,7 +5,7 @@ export const formSchema = z.object({
   lastName: z.string().min(2, "Last name is required"),
   email: z.string().email("Enter a valid email"),
   phone: z.string().min(10, "Phone number is required"),
-  age: z.number().min(1, "Age is required"),
+  age: z.number().min(18, "Age is required"),
   gender: z.string().min(1, "Please select gender"),
   dateOfBirth: z.string().min(1, "Date of birth is required"),
   city: z.string().min(2, "City is required"),
