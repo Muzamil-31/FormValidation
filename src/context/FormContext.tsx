@@ -1,10 +1,10 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import type { FormData, RecordData } from "../types/form";
+import { loadRecords, saveRecords } from "../storage/formStorage";
 
 type FormContextType = {
   records: RecordData[];
   editingRecord: RecordData | null;
-
   addRecord: (data: FormData) => void;
   updateRecord: (data: RecordData) => void;
   deleteRecord: (id: string) => void;
@@ -19,7 +19,13 @@ export function FormProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [records, setRecords] = useState<RecordData[]>([]);
+
+  const [records, setRecords] = useState<RecordData[]>(loadRecords);
+
+  useEffect(() => {
+  saveRecords(records);
+}, [records]);
+
   const [editingRecord, setEditingRecord] =
     useState<RecordData | null>(null);
 
@@ -34,6 +40,7 @@ export function FormProvider({
       newRecord,
     ]);
   };
+
 
   const updateRecord = (data: RecordData) => {
     setRecords((currentRecords) =>
@@ -66,7 +73,7 @@ export function FormProvider({
         updateRecord,
         deleteRecord,
         editRecord,
-        clearEditing,
+        clearEditing,   
       }}
     >
       {children}
